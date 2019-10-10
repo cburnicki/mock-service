@@ -3,8 +3,11 @@ import {createExpressServer} from "routing-controllers"
 import "reflect-metadata";
 import {ErrorController} from "./error-controller";
 import {Controller} from "./controller";
+import * as express from "express";
+import { requestLogging } from "./middleware/request-logging";
 
 const SERVER_PORT = process.env.MOCK_PORT || 8000;
+const STATIC_DIR = process.env.STATIC_DIR || 'static';
 
 export class Server {
 
@@ -28,13 +31,13 @@ export class Server {
                 controllers: [ErrorController, Controller],
                 defaultErrorHandler: true,
             });
+            this.app.use(requestLogging);
+            this.app.use('/static', express.static(STATIC_DIR));
             this.server = this.app.listen(SERVER_PORT, () => {
                 console.log('server running on *:'+SERVER_PORT);
                 resolve(this.app);
             });
         });
-
-
     }
 
     private stopHttpServer(): Promise<void> {
