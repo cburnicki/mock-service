@@ -16,6 +16,6 @@ It will automatically log datetime, method, url and headers of each incoming req
 
 Put your static files in a directory given in the `STATIC_DIR` environment variable (default: `./static`). Any request to `/static/*` will serve your files.
 
-## Error responses
+## Errors and other status responses
 
-* A `GET` or `POST` request to `/error/{code}` will send back an error response with code `{code}`.
+* Any request to `/status/{code}` will send back a response with http status code `{code}`.
