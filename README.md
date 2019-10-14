@@ -16,6 +16,9 @@ It will automatically log datetime, method, url and headers of each incoming req
 
 Put your static files in a directory given in the `STATIC_DIR` environment variable (default: `./static`). Any request to `/static/*` will serve your files.
 
+## Delays and timeouts
+* A query param `?delay={t}` causes the server to delay it's response for `{t}`ms.
+
 ## Errors and other status responses
 
 * Any request to `/status/{code}` will send back a response with http status code `{code}`.
